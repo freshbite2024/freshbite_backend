@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh Bite Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        header img {
+            max-height: 60px;
+        }
+        nav {
+            margin-bottom: 20px;
+        }
+        .nav-link {
+            color: #28a745;
+        }
+        .nav-link:hover {
+            color: #155724;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-title {
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="assets/fresh_bite_logo.png" alt="Fresh Bite Logo">
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Retailers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Raw Material</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h2 class="text-center text-success mb-4">Dashboard</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Top Performer</h5>
+                        <p class="card-text">Highlight the best-performing retailer or product here.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bottom Boxer</h5>
+                        <p class="card-text">Display the lowest-performing retailer or product here.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Top Sales</h5>
+                        <p class="card-text">Showcase the product or retailer with the highest sales.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Add any JavaScript functionality if needed
+    </script>
+</body>
+</html>
