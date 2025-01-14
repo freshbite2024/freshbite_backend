@@ -20,6 +20,5 @@ ENV DB_HOST=${DB_HOST} \
     DB_PASSWORD=${DB_PASSWORD} \
     DB_DATABASE=${DB_DATABASE}
 
-
 # Command to run your application
 CMD ["bundle", "exec", "rackup", "--host", "0.0.0.0", "--port", "8080"]
