@@ -5,14 +5,24 @@ require 'dotenv/load'  # Optional for .env file
 require 'sinatra/namespace'
 require 'sinatra/activerecord'
 
+# ActiveRecord::Base.establish_connection(
+#   adapter: 'mysql2',
+#   port: '27005',
+#   host: 'mysql-freshbite-munendra0412-3e77.c.aivencloud.com',
+#   username: 'munendra',
+#   password: 'AVNS_AtTD6atRjgWRyaDKs7q',
+#   database: 'freshbite'
+# )
+
 ActiveRecord::Base.establish_connection(
   adapter: 'mysql2',
-  port: '27005',
-  host: 'mysql-freshbite-munendra0412-3e77.c.aivencloud.com',
+  port: '3306', # Standard MySQL port
+  host: '35.200.224.30', # Reserved static IP
   username: 'munendra',
-  password: 'AVNS_AtTD6atRjgWRyaDKs7q',
-  database: 'freshbite'
+  password: 'Aarush210621@',
+  database: 'freshbite_mysql'
 )
+
 
 # Load helpers dynamically
 Dir["helpers/*.rb"].each { |helper| require_relative helper }

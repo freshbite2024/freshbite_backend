@@ -3,10 +3,10 @@ options:
 
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/unified-mender-447706-v0/my-repo/sinatra-app', '.']
+  args: ['build', '-t', 'asia-south1-docker.pkg.dev/unified-mender-447706-v0/my-repo/sinatra-app', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/unified-mender-447706-v0/my-repo/sinatra-app']
+  args: ['push', 'asia-south1-docker.pkg.dev/unified-mender-447706-v0/my-repo/sinatra-app']
 
 - name: 'gcr.io/cloud-builders/gcloud'
   args:
@@ -14,9 +14,9 @@ steps:
     - 'deploy'
     - 'sinatra-app'
     - '--image'
-    - 'us-central1-docker.pkg.dev/unified-mender-447706-v0/my-repo/sinatra-app'
+    - 'asia-south1-docker.pkg.dev/unified-mender-447706-v0/my-repo/sinatra-app'
     - '--platform'
     - 'managed'
     - '--region'
-    - 'us-central1'
+    - 'asia-south1'
     - '--allow-unauthenticated'
