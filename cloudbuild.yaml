@@ -1,8 +1,9 @@
+#cloudbuild.yaml
 options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-# Step 1: Build the Docker image
+# Step 1: Build the Docker image and tag it
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-t', 'asia-south1-docker.pkg.dev/unified-mender-447706-v0/cloud-run-source-deploy/sinatra-app', '.']
 
