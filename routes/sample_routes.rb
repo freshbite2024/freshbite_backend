@@ -8,7 +8,7 @@ module Sinatra
           app.get '/sample' do
             content_type :json
             results = Testing.all_records
-            results = [{"name":"naga munendra", "mobile":"70751175111"}]
+            # results = [{"name":"naga munendra", "mobile":"70751175111"}]
             results.to_json
           end
         end
