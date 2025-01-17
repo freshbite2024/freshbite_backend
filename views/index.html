@@ -70,7 +70,7 @@
 
                 // Send login request to authenticate the user
                 $.ajax({
-                    url: 'http://localhost:8080/api/portal/authenticate',
+                    url: "https://sinatra-app-218891824102.asia-south1.run.app/api/portal/authenticate",
                     method: 'POST',
                     contentType: 'application/json',
                     data: JSON.stringify({ employee_code: employeeCode, pin: pin }),
@@ -92,7 +92,7 @@
             // Function to load the dashboard
             function loadDashboard() {
                 $.ajax({
-                    url: 'http://localhost:8080/api/portal/dashboard',
+                    url: "https://sinatra-app-218891824102.asia-south1.run.app/api/portal/dashboard",
                     method: 'GET',
                     xhrFields: {
                         withCredentials: true // Ensure cookies (session cookies) are sent along with the request
