@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Freshbite Dashboard</title>
+  <link rel="stylesheet" href="static/vendors/feather/feather.css">
+  <link rel="stylesheet" href="static/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="static/vendors/css/vendor.bundle.base.css">
+  <link rel="stylesheet" href="static/vendors/datatables.net-bs4/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="static/vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="static/js/select.dataTables.min.css">
+  <link rel="stylesheet" href="static/css/vertical-layout-light/style.css">
+  <link rel="shortcut icon" href="static/images/favicon.png" />
+  <style>
+    .navbar-brand-text {
+      font-size: 32px;
+      font-weight: bold;
+      color: darkgreen;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(to right, #2e7d32, #66bb6a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: absolute;
+      left: 20px;
+    }
+
+    /* Modal Dialog */
+    .modal-dialog {
+      max-width: 800px;
+      width: 100%;
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 5% auto;
+      padding: 20px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    #distributionForm input {
+      width: 100%;
+    }
+
+    .form-inline {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .form-inline input {
+      width: 48%;
+    }
+
+    @media (max-width: 768px) {
+      .form-inline input {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+
+    .modal-header {
+      border-bottom: 2px solid #ddd;
+      font-size: 16px;
+    }
+
+    .modal-header .close {
+      font-size: 1.5em;
+    }
+
+    .list-group-item {
+      cursor: pointer;
+    }
+
+    .list-group-item:hover {
+      background-color: #f8f9fa;
+    }
+
+    .btn-primary {
+      width: 100%;
+    }
+
+    /* Sidebar */
+    .sidebar .nav-item .nav-link {
+      font-size: 16px;
+    }
+
+    /* Modal Close Button */
+    .modal-header .close {
+      color: #000;
+      font-size: 1.5rem;
+    }
+
+    /* Ensuring GB and RB are on the same line */
+    .form-inline input {
+      width: 48%;
+    }
+
+    /* Sidebar toggling on mobile */
+    @media (max-width: 767px) {
+      .sidebar {
+        display: none;
+      }
+
+      .sidebar.active {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container-scroller">
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"></div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+          <span class="navbar-brand-text">Freshbite</span>
+        </div>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="container-fluid page-body-wrapper">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-layout menu-icon"></i>
+              <span class="menu-title">Raw Material</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="#">Purchase</a></li>
+                <li class="nav-item"> <a class="nav-link" href="#">View</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+              <div class="card tale-bg">
+                <div class="card-people mt-auto">
+                  <img src="static/images/dashboard/people.svg" alt="people">
+                  <div class="weather-info">
+                    <div class="d-flex">
+                      <div>
+                        <h2 class="mb-0 font-weight-normal"><i class="icon-sun mr-2"></i>31<sup>C</sup></h2>
+                      </div>
+                      <div class="ml-2">
+                        <h4 class="location font-weight-normal">Rayachoti</h4>
+                        <h6 class="font-weight-normal">India</h6>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 grid-margin transparent">
+              <div class="row">
+                <div class="col-md-6 grid-margin stretch-card">
+                  <div class="card card-tale" onclick="openModal()">
+                    <div class="card-body">
+                      <p class="mb-4">Upload Distribution</p>
+                      <p>Total : 250 Boxes</p>
+                      <p>Returned: 20 Boxes</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-4 stretch-card transparent">
+                  <div class="card card-dark-blue">
+                    <div class="card-body">
+                      <p class="mb-4">Upload Collection</p>
+                      <p>Pending : 500</p>
+                      <p>Paid : 50</p>
+                      <p>Remaining: 450</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <footer class="footer"></footer>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="distributionModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <form id="distributionForm">
+            <div class="form-group">
+              <label for="searchEmployee">Search Employee:</label>
+              <input type="text" id="searchEmployee" class="form-control" placeholder="Search Employee...">
+              <ul id="employeeList" class="list-group mt-2"></ul>
+            </div>
+            <div class="form-group">
+              <label for="selectedEmployee">Selected Employee:</label>
+              <input type="text" id="selectedEmployee" class="form-control" readonly>
+              <input type="hidden" id="employeeId">
+            </div>
+            <div class="form-inline">
+              <div class="form-group">
+                <label for="givenBoxes">GB:</label>
+                <input type="number" id="givenBoxes" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="returnedBoxes">RB:</label>
+                <input type="number" id="returnedBoxes" class="form-control" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const employees = [
+      { id: 1, name: "John Doe" }, { id: 2, name: "Jane Smith" },
+      { id: 3, name: "Alice Johnson" }, { id: 4, name: "Robert Brown" },
+      { id: 5, name: "Emily Davis" }, { id: 6, name: "Michael Wilson" },
+      { id: 7, name: "Sarah Lee" }, { id: 8, name: "David Clark" },
+      { id: 9, name: "Sophia Martinez" }, { id: 10, name: "James Taylor" }
+    ];
+
+    document.getElementById('searchEmployee').addEventListener('input', function () {
+      let searchValue = this.value.toLowerCase();
+      let filteredEmployees = employees.filter(emp => emp.name.toLowerCase().includes(searchValue));
+      let employeeList = document.getElementById('employeeList');
+      employeeList.innerHTML = '';
+      filteredEmployees.forEach(emp => {
+        let li = document.createElement('li');
+        li.textContent = emp.name;
+        li.classList.add('list-group-item', 'list-group-item-action');
+        li.onclick = function () {
+          document.getElementById('selectedEmployee').value = emp.name;
+          document.getElementById('employeeId').value = emp.id;
+          employeeList.innerHTML = '';
+        };
+        employeeList.appendChild(li);
+      });
+    });
+
+    document.getElementById('distributionForm').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      // Capture form values
+      let userId = document.getElementById('employeeId').value;
+      let givenBoxes = document.getElementById('givenBoxes').value;
+      let returnedBoxes = document.getElementById('returnedBoxes').value;
+
+      // Log form data for debugging
+      console.log('Form Data:', {
+        userId: userId,
+        givenBoxes: givenBoxes,
+        returnedBoxes: returnedBoxes
+      });
+
+      // Validate form fields
+      if (!userId) {
+        alert('Please select an employee.');
+        return;
+      }
+      if (givenBoxes === "" || returnedBoxes === "") {
+        alert('Please fill in both boxes fields.');
+        return;
+      }
+
+      // Log the request payload before sending
+      console.log('Sending Data to API through Headers:', {
+        user_id: userId,
+        given_boxes: parseInt(givenBoxes),
+        returned_boxes: parseInt(returnedBoxes)
+      });
+
+      // Send data to API through headers
+      fetch('http://localhost:8080/api/portal/upload_distribution', {
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'USERID': userId,
+          'GIVENBOXES': givenBoxes,
+          'RETURNEDBOXES': returnedBoxes
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Log response data for debugging
+        console.log('API Response:', data);
+
+        if (data.messagecode === 200) {
+          // Success message and modal reset
+          alert('Distribution recorded successfully!');
+          document.getElementById('distributionForm').reset();
+          $('#distributionModal').modal('hide');
+          openModal(); // Reopen the modal for the next record
+        } else {
+          alert('Failed to record distribution. Please try again.');
+        }
+      })
+      .catch(error => {
+        // Log any error encountered during request
+        console.error('Error during API request:', error);
+        alert('Error recording distribution!');
+      });
+    });
+
+
+    function openModal() {
+      $('#distributionModal').modal('show');
+    }
+
+    $(document).ready(function () {
+      // Toggle Sidebar on mobile
+      $('.navbar-toggler').click(function () {
+        $('#sidebar').toggleClass('active');
+      });
+    });
+  </script>
+
+  <!-- Bootstrap and jQuery scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

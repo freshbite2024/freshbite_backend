@@ -7,6 +7,9 @@ gem 'sinatra', '~> 2.2'
 gem 'sinatra-contrib', '~> 2.1'
 gem 'sinatra-activerecord', '~> 2.0'
 
+gem 'sinatra-cross_origin'
+
+
 # ActiveRecord and MySQL
 gem 'activerecord', '~> 7.0'
 gem 'mysql2', '~> 0.5'
@@ -18,3 +21,6 @@ gem 'dotenv', '~> 2.7'
 gem 'rack', '~> 2.2'
 
 gem 'puma'
+
+gem 'jwt'
+

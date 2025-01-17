@@ -11,7 +11,8 @@ class Testing < ActiveRecord::Base
 
   # Example: Custom SELECT query
   def self.custom_query
-    result = ActiveRecord::Base.connection.exec_query("SELECT * FROM testing")
+    puts "COMMING IN CUSTOM QUERY"
+    result = ActiveRecord::Base.connection.exec_query("SELECT * FROM testings")
     result.map { |row| row }
   end
 end
