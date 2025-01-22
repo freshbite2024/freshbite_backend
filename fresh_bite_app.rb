@@ -5,22 +5,23 @@ require 'dotenv/load' # Optional for .env file
 require 'sinatra/namespace'
 require 'sinatra/activerecord'
 require 'sinatra/cross_origin'
+require 'logger'  # For custom logger
 
-# Establish database connection
-# ActiveRecord::Base.establish_connection(
-#   adapter: 'mysql2',
-#   port: '3306',
-#   host: 'host.docker.internal', # Connects to MySQL on the host machine
-#   username: 'root',
-#   password: 'root',
-#   database: 'freshbite_mysql'
-# )
+# Setup custom logger to log to a file
+log_file = File.open('app.log', 'a')
+log_file.sync = true  # Ensures logs are written in real-time
+logger = Logger.new(log_file)
+logger.level = Logger::DEBUG
 
+# Configure ActiveRecord logger
+ActiveRecord::Base.logger = logger  # Log ActiveRecord queries to the same file
+
+# Database connection setup
 ActiveRecord::Base.establish_connection(
   adapter: 'mysql2',
-  port: '3306', # Standard MySQL port
-  host: '35.200.224.30', # Reserved static IP
-  username: 'munendra',
+  port: '3306',
+  host: 'localhost',
+  username: 'root',
   password: 'Aarush210621@',
   database: 'freshbite_mysql'
 )
@@ -44,6 +45,7 @@ class FreshBiteApp < Sinatra::Base
 
   # Default route for the main page
   get '/' do
+    logger.info "Serving index.html"
     send_file File.join(settings.public_folder, 'index.html')
   end
 
@@ -53,11 +55,15 @@ class FreshBiteApp < Sinatra::Base
     set :allow_credentials, true
     set :session_secret, 'freshbite17012025'
     enable :sessions # Enable session handling globally
+
+    # Log the configuration settings
+    logger.info "Sinatra Configuration: Cross-Origin enabled with origins: #{settings.origins}"
   end
 
   # API namespace and routes
   namespace '/api' do
     get '/' do
+      logger.info "Accessed /api endpoint"
       'Hello world! Welcome to RetailerAppStg API. This is V1 Application.'
     end
 
@@ -68,5 +74,11 @@ class FreshBiteApp < Sinatra::Base
     namespace '/portal' do
       register Sinatra::RetailerApp::Routing::Portal
     end
+  end
+
+  # Error handling
+  error 500 do
+    logger.error "Internal Server Error: #{env['sinatra.error'].message}"
+    'Internal Server Error, please check logs for details.'
   end
 end
