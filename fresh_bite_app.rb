@@ -80,7 +80,8 @@ class FreshBiteApp < Sinatra::Base
 
   # Error handling
   error 500 do
-    settings.logger.error "Internal Server Error: #{env['sinatra.error'].message}"
-    'Internal Server Error, please check logs for details.'
+    # settings.logger.error "Internal Server Error: #{env['sinatra.error'].message}"
+    # 'Internal Server Error, please check logs for details.'
+    puts "ERROR #{error}"
   end
 end
