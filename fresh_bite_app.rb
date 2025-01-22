@@ -37,11 +37,13 @@ class FreshBiteApp < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   register Sinatra::CrossOrigin
 
+  # Set the logger for Sinatra
+  configure do
+    set :logger, logger
+  end
+
   # Include all helper modules
   helpers JwtToken
-
-  # Set the logger for Sinatra
-  set :logger, logger
 
   # Default route for the main page
   get '/' do
