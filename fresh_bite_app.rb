@@ -7,11 +7,21 @@ require 'sinatra/activerecord'
 require 'sinatra/cross_origin'
 require 'logger'  # For custom logger
 
+# Ensure the logs directory exists
+log_dir = 'logs'
+Dir.mkdir(log_dir) unless Dir.exist?(log_dir)
+
 # Setup custom logger to log to a file
-log_file = File.open('app.log', 'a')
+log_file = File.open("#{log_dir}/freshbite_backend.log", 'a')
 log_file.sync = true  # Ensures logs are written in real-time
 logger = Logger.new(log_file)
 logger.level = Logger::DEBUG
+
+# Set up logging to a file
+set :logger, logger
+
+# Example of logging something
+logger.info "Application started"
 
 # Configure ActiveRecord logger
 ActiveRecord::Base.logger = logger  # Log ActiveRecord queries to the same file
