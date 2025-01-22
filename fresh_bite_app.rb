@@ -35,7 +35,8 @@ class FreshBiteApp < Sinatra::Base
 
   # Default route for the main page
   get '/' do
-    send_file File.join(settings.public_folder, 'index.html')
+    # Redirection to public IP
+    redirect 'https://43.204.98.127/'
   end
 
   configure do
