@@ -7,24 +7,11 @@ require 'sinatra/activerecord'
 require 'sinatra/cross_origin'
 require 'logger'  # For custom logger
 
-# Ensure the logs directory exists
-log_dir = 'logs'
-Dir.mkdir(log_dir) unless Dir.exist?(log_dir)
-
 # Setup custom logger to log to a file
-log_file = File.open("#{log_dir}/freshbite_backend.log", 'a')
+log_file = File.open('logs/freshbite_backend.log', 'a')
 log_file.sync = true  # Ensures logs are written in real-time
 logger = Logger.new(log_file)
 logger.level = Logger::DEBUG
-
-# Set up logging to a file
-set :logger, logger
-
-# Example of logging something
-logger.info "Application started"
-
-# Configure ActiveRecord logger
-ActiveRecord::Base.logger = logger  # Log ActiveRecord queries to the same file
 
 # Database connection setup
 ActiveRecord::Base.establish_connection(
@@ -53,9 +40,12 @@ class FreshBiteApp < Sinatra::Base
   # Include all helper modules
   helpers JwtToken
 
+  # Set the logger for Sinatra
+  set :logger, logger
+
   # Default route for the main page
   get '/' do
-    logger.info "Serving index.html"
+    settings.logger.info "Serving index.html"
     send_file File.join(settings.public_folder, 'index.html')
   end
 
@@ -67,13 +57,13 @@ class FreshBiteApp < Sinatra::Base
     enable :sessions # Enable session handling globally
 
     # Log the configuration settings
-    logger.info "Sinatra Configuration: Cross-Origin enabled with origins: #{settings.origins}"
+    settings.logger.info "Sinatra Configuration: Cross-Origin enabled with origins: #{settings.origins}"
   end
 
   # API namespace and routes
   namespace '/api' do
     get '/' do
-      logger.info "Accessed /api endpoint"
+      settings.logger.info "Accessed /api endpoint"
       'Hello world! Welcome to RetailerAppStg API. This is V1 Application.'
     end
 
@@ -88,7 +78,7 @@ class FreshBiteApp < Sinatra::Base
 
   # Error handling
   error 500 do
-    logger.error "Internal Server Error: #{env['sinatra.error'].message}"
+    settings.logger.error "Internal Server Error: #{env['sinatra.error'].message}"
     'Internal Server Error, please check logs for details.'
   end
 end
