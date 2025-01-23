@@ -34,26 +34,26 @@ class FreshBiteApp < Sinatra::Base
   helpers JwtToken
 
   # Default route for the main page
-  get '/' do
-    # Redirection to public IP
-    redirect 'https://43.204.98.127/'
-  end
+  # get '/' do
+  #   # Redirection to public IP
+  #   redirect 'https://43.204.98.127/'
+  # end
 
-  configure do
-    enable :cross_origin
-    set :origins, 'http://localhost:8080' # Adjust for your frontend's origin
-    set :allow_credentials, true
-    set :session_secret, 'freshbite17012025'
-    enable :sessions # Enable session handling globally
+  # configure do
+  #   enable :cross_origin
+  #   set :origins, 'http://localhost:8080' # Adjust for your frontend's origin
+  #   set :allow_credentials, true
+  #   set :session_secret, 'freshbite17012025'
+  #   enable :sessions # Enable session handling globally
 
-    # Ensure the app binds to all network interfaces
-    set :bind, '0.0.0.0'
-    set :port, 4567
+  #   # Ensure the app binds to all network interfaces
+  #   set :bind, '0.0.0.0'
+  #   set :port, 4567
 
-    # Log the configuration settings (Sinatra automatically logs to STDOUT)
-    puts "Sinatra Configuration: Cross-Origin enabled with origins: #{settings.origins}"
-    puts "Sinatra is listening on http://#{settings.bind}:#{settings.port}"
-  end
+  #   # Log the configuration settings (Sinatra automatically logs to STDOUT)
+  #   puts "Sinatra Configuration: Cross-Origin enabled with origins: #{settings.origins}"
+  #   puts "Sinatra is listening on http://#{settings.bind}:#{settings.port}"
+  # end
 
   # API namespace and routes
   namespace '/api' do
