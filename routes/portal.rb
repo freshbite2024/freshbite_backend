@@ -35,7 +35,7 @@ module Sinatra
               return { messagecode: 400, message: "Employee Code and PIN are required" }.to_json
             end
 
-            if employee_code == "EMP001" && pin == "1234"
+            if employee_code == "EMP001" && pin == "12345"
               session[:logged_in] = true
               session[:employee_code] = employee_code
               puts "SESSION AFTER SETTING: #{session.inspect}"  # Log session to verify
