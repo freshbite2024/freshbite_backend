@@ -58,7 +58,7 @@ class FreshBiteApp < Sinatra::Base
   # API namespace and routes
   namespace '/api' do
     get '/' do
-      'Hello world! Welcome to RetailerAppStg API. This is V1 Application.'
+      erb :portal_dashboard
     end
 
     namespace '/authentication' do
